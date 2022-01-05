@@ -190,6 +190,16 @@ const char *checkfile(char *hash, char *path)
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &s);
     res = curl_easy_perform(curl);
 
+    char* id_str = strstr(s.ptr,"self");
+
+    char file_id[80];
+    memcpy( file_id, &id_str[48], 64);
+    file_id[64] = '\0';
+
+    char file_url[100];
+    strcpy(file_url,"https://www.virustotal.com/gui/file/");
+    strcat(file_url,file_id);
+    
 
     char malware[] = "\"category\": \"malicious\"";
     char *mlw = strstr(s.ptr, malware);
@@ -220,16 +230,16 @@ const char *checkfile(char *hash, char *path)
     {
         if (count(s.ptr, malware)>2 && (i != NULL || j != NULL || k != NULL)){
             remove(path);
-            printf("%s - Malicious! - Deleted\n",path);
+            printf("%s - Malicious! - Deleted - %s\n",path,file_url);
             return 0;
         }
         else {
-            printf("%s - Suspicious!\n",path);
+            printf("%s - Suspicious! - %s\n",path,file_url);
             return 0;
         }
     }
     else {
-        printf("%s - Clean\n",path);
+        printf("%s - Clean - %s\n",path, file_url);
         return 0;
     }
     

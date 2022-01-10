@@ -9,7 +9,7 @@
 #include <libgen.h>
 
 //change to your own api key
-char api_key[] = "x-apikey: 6b647294775f31ff6feaf95a77661e3974fc6563b5cb65d6db35cba74a6e4f6d";
+char api_key[] = "x-apikey: 6b647294775f31ffxxxxxxxxxxxxxxx974fc6563b5cb65d6db35cba74a6e4f6d";
 
 int flag = 0;
 
